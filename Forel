@@ -1,0 +1,25 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Исходные данные
+T = np.array([19, 20, 18, 21])  # Температура воды
+O = np.array([8.0, 8.2, 7.8, 8.4])  # Уровень кислорода
+F = np.array([450, 480, 420, 510])  # Количество корма
+G = np.array([180, 190, 170, 200])  # Рост форели
+
+# Объединение входных данных в одну матрицу
+X = np.column_stack((T, O, F))
+
+# Создание и обучение модели линейной регрессии
+model = LinearRegression()
+model.fit(X, G)
+
+# Ожидаемые значения на следующий год
+expected_T = 22  # Ожидаемая температура воды
+expected_O = 8.5  # Ожидаемый уровень кислорода
+expected_F = 500  # Ожидаемое количество корма
+
+# Прогнозирование роста форели
+predicted_growth = model.predict(np.array([[expected_T, expected_O, expected_F]]))
+
+print(f"Прогнозируемый рост форели на следующий год: {predicted_growth[0]:.2f} см")
